@@ -1,4 +1,5 @@
 <?php 
+    require 'db.inc.php';
     class Ulesrend{
         private $id;
         private $nev;
@@ -11,8 +12,11 @@
             // adatbázisból lekérdezzük
             $sql = "SELECT * FROM `5/13ice` WHERE id=$id";
 		    $result = $conn->query($sql);
-            //visszaadjuk
-            return $result;
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc()
+                return $row;
+            }
+            else return FALSE;   
         }
     }
 ?>
