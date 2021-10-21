@@ -27,6 +27,27 @@
         public function get_nev(){
            return $this->nev;
         }
+
+        public function get_sor(){
+            return $this->sor;
+        }
+        
+        public function get_oszlop(){
+            return $this->oszlop;
+        }
+
+        public function get_jelszo(){
+            return $this->jelszo;
+        }
+
+        public function get_felhasznalonev(){
+            return $this->felhasznalonev;
+        }
+
+        public function get_id(){
+            return $this->id;
+        }
+        
     }   
     $tanulo = new Ulesrend;
     $tanulo ->set_user(2, $conn);
