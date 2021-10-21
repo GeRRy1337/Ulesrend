@@ -2,9 +2,10 @@
     require 'menu.php';
     require 'db.inc.php';
     require 'function.inc.php';
-    
+    require 'model/Ulesrend.php';
 
-    $admins= getIds($conn,"admins");
+    $admins = getIds($conn,"admins");
+    $tanulo = new Ulesrend;
 
     if(isset($_POST['pw']) and isset($_POST['user'])) {
 		$loginError='';
@@ -15,14 +16,15 @@
 			$loginError.=" Nem írtál be jelszót!";
 		}
 		if($loginError == ''){
-			$sql = "SELECT * FROM `5/13ice` WHERE felhasznalonev='".$_POST['user']."'";
+			$sql = "SELECT id FROM `5/13ice` WHERE felhasznalonev='".$_POST['user']."'";
 			$result = $conn->query($sql);
 			if ($result->num_rows > 0) {
 				if($row = $result->fetch_assoc()){
-					if(md5($_POST['pw'])==$row['jelszo']){
-						$_SESSION["id"]=$row['id'];
-						$_SESSION["nev"]=$row['nev'];
-						$_SESSION["username"]=$row['felhasznalonev'];
+                    $tanulo->set_user($row['id'],$conn);
+					if(md5($_POST['pw'])==$tanulo->get_jelszo()){
+						$_SESSION["id"]=$tanulo->get_id();
+						$_SESSION["nev"]=$tanulo->get_nev();
+						$_SESSION["username"]=$tanulo->get_felhasznalonev();
 						if(in_array($row['id'],$admins)){
 							$_SESSION["admin"]=1;
 						}else{

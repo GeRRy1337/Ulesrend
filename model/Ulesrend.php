@@ -1,5 +1,4 @@
 <?php
-    require '../db.inc.php';
 
     class Ulesrend{
         private $id;
@@ -47,10 +46,11 @@
         public function get_id(){
             return $this->id;
         }
-        
+
     }   
-    $tanulo = new Ulesrend;
+
+    /*$tanulo = new Ulesrend;
     $tanulo ->set_user(2, $conn);
-    echo $tanulo->get_nev();
+    echo $tanulo->get_nev();*/
 
 ?>
