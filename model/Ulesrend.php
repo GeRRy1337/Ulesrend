@@ -47,6 +47,18 @@
             return $this->id;
         }
 
+        public function tanulokListaja($conn) {
+            $lista = array();
+            $sql = "SELECT id FROM `5/13ice`";
+            if($result = $conn->query($sql)) {
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        $lista[] = $row['id'];
+                    }
+                }
+            }
+            return $lista;
+        }
     }   
 
     /*$tanulo = new Ulesrend;

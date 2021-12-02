@@ -1,18 +1,6 @@
 <?php
-    session_start();
 
-    $szoveg="Belépés";
-    $link="login.php";
-    if (!empty($_SESSION["id"])){
-        $szoveg='Kilépés';
-    }
-
-    $menupontok=array(
-        'index.php' => "Főoldal",
-        "ulesrend.php" => "Ülésrend",
-        $link => $szoveg,
-    )
-
+   
 ?>
 
 <!DOCTYPE html>
@@ -37,10 +25,12 @@
         <?php 
             foreach ($menupontok as $key => $value) {
                 $active="";
-                if ($_SERVER['PHP_SELF']=="/Ulesrend/".$key)  $active = 'active';
+                if ($_SERVER['REQUEST_URI']=="/Ulesrend/".$key)  $active = 'active';
+
+                if($key == 'felhasznalo') $key.='&action='.$action;
                 ?>
                     <li class="nav-item <?php echo $active; ?>">
-                        <a class="nav-link" href="<?php echo $key; ?>"><?php echo $value; ?></a>
+                        <a class="nav-link" href="index.php?page=<?php echo $key; ?>"><?php echo $value; ?></a>
                     </li>
            <?php } ?>
         
