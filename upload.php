@@ -6,10 +6,11 @@ $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 $allowed_filetypes=["img","jpg","png","jpeg","gif"];
 $errors=array();
-
+$ff=0;
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
   $countfiles = count($_FILES['fileToUpload']['name']);
+  $ff=0;
   for($i=0;$i<$countfiles;$i++){
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"][$i]);
     $uploadOk = 1;
@@ -37,7 +38,7 @@ if(isset($_POST["submit"])) {
       $errors[$filename][]="<span style=color:#F22;>Nem sikerült a kép feltöltése.</span><br>";
     } else {
       if (@move_uploaded_file($_FILES["fileToUpload"]["tmp_name"][$i], $target_file)) {
-        $errors[$filename][]= "A kép fel lett töltve.<br>";
+        $ff++;
       } else {
         $errors[$filename][]="Hiba a kép feltöltése közben.<br>";
       }
@@ -46,7 +47,7 @@ if(isset($_POST["submit"])) {
   }//for
  
 }
-
+  if($ff>0) echo "$ff fájl feltöltve<br>";
   foreach($errors as $key => $error){
     echo $key."<br>";
     foreach($error as $line){
