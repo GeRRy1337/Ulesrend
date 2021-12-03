@@ -37,6 +37,7 @@
 
 				if ($tanuloIdk) {
 					$sor = 0;
+					$files=scandir("uploads");
 					foreach($tanuloIdk as $row) {
 						$tanulo->set_user($row, $conn);
 						if($tanulo->get_sor() != $sor) {
@@ -50,6 +51,12 @@
 							if(in_array($row, $hianyzok)) $plusz .=  ' class="missing"';
 							if($row == $en) $plusz .=  ' id="me"';
 							if($row == $tanar) $plusz .=  ' colspan="2"';
+							foreach($files as $file){
+								if ( explode('.',$file)[0] == $tanulo->get_id()){
+									$plusz .= ' style="background-image:url(uploads/'.$file.');background-size:contain; background-repeat: no-repeat;"';
+								}
+							}
+							
 							echo "<td".$plusz.">" . $tanulo->get_nev();
 							if(!empty($_SESSION["id"])) {
 								if(in_array($_SESSION["id"], $adminok)) {

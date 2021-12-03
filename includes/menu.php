@@ -28,11 +28,20 @@
                 if ($_SERVER['REQUEST_URI']=="/Ulesrend/".$key)  $active = 'active';
 
                 if($key == 'felhasznalo') $key.='&action='.$action;
+                if($key =='profil') {
+                    if(!empty($_SESSION["id"])){
+                        ?>
+                             <li class="nav-item <?php echo $active; ?>">
+                                <a class="nav-link" href="index.php?page=<?php echo $key; ?>"><?php echo $value; ?></a>
+                            </li>
+                        <?php
+                    }
+                }else{
                 ?>
                     <li class="nav-item <?php echo $active; ?>">
                         <a class="nav-link" href="index.php?page=<?php echo $key; ?>"><?php echo $value; ?></a>
                     </li>
-           <?php } ?>
+           <?php }} ?>
         
         
         </ul>

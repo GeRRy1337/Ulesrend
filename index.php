@@ -32,7 +32,8 @@ if(isset($_REQUEST['page'])) {
 }
 
 $menupontok = array(    'index' => "Főoldal", 
-                        'ulesrend' => "Ülésrend", 
+                        'ulesrend' => "Ülésrend",
+                        'profil' => "Profil", 
                         'felhasznalo' => $szoveg
                 );
 

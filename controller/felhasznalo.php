@@ -16,6 +16,7 @@ if(isset($_POST['user']) and isset($_POST['pw'])) {
 				if(md5($_POST['pw']) == $tanulo->get_jelszo()) {
 					$_SESSION["id"] = $row['id'];
 					$_SESSION["nev"] = $tanulo->get_nev();
+					$_SESSION['username'] = $tanulo->get_felhasznalonev();
                     header('Location: index.php?page=ulesrend');
                     exit();
 				}
