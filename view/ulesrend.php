@@ -23,9 +23,24 @@
 									?>
 										
 									</select>
-							<br>
 						<input type="submit">
-						</form>						
+						</form>
+						<hr></hr>
+						<form action="index.php?page=ulesrend" method="post" enctype="multipart/form-data">
+							Profilkép: 	<select name="profilkep_id">
+								<?php
+
+								if ($tanuloIdk) {
+									foreach($tanuloIdk as $row) {
+										$tanulo->set_user($row, $conn);
+										if($tanulo->get_nev()) echo '<option value="'.$row.'">'.$tanulo->get_nev().'</option>';
+									}
+								}
+								?>
+							</select>
+							<input type="file" name="fileToUpload" id="fileToUpload"><br>
+							<input type="submit">
+						</form>							
 						<?php
 					}
 				}
