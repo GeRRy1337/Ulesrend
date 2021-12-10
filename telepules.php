@@ -1,10 +1,32 @@
+<?php
+    require('includes/db.inc.php');
+    
+	$telepulesek=array();
+
+	$sql = "SELECT * FROM telepulesek order by nev";
+	$result = $conn->query($sql);
+	
+	if($result){
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$telepulesek[$row['id']-1]=array($row['irsz'],$row["nev"]);
+			}
+		} else {
+			echo "0 results";
+		}
+	}
+	else{
+		echo "Error in ".$sql."<br>".$conn->error;
+  	}
+	
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Települések</title>
     <style>
         table{
             border:2px solid black;
@@ -22,31 +44,13 @@
     </tr>
     <?php
        
-        /*$file=file("telepulesek.txt");
-        sort($file);
-        foreach($file as $line){
+        foreach($telepulesek as $line){
             echo '<tr>';
-            $line=explode("\t",$line);
             echo '<td>'.$line[0].'</td>';
             echo '<td>'.$line[1].'</td>';
             echo '</tr>';
-        }*/
-
-        require('includes/db.inc.php');
-
-        $myfile= fopen('telepulesek.txt','r') or die('Unable to open file!');
-        while(!feof($myfile)){
-            $line=explode("\t",fgets($myfile));
-            $sql = "INSERT INTO telepulesek(irsz,nev) VALUES(".$line[0].",'".$line[1]."') ";
-            if(!$result = $conn->query($sql)) {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
-            
-            echo '</tr>';
         }
-
-        fclose($myfile);
-
+        unset($telepulesek);
     ?>
 </table>
 </body>
